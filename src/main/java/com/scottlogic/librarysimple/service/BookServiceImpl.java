@@ -2,6 +2,7 @@ package com.scottlogic.librarysimple.service;
 
 import com.scottlogic.librarysimple.dao.BookRepository;
 import com.scottlogic.librarysimple.domain.Book;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

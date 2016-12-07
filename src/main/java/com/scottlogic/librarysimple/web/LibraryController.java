@@ -20,11 +20,7 @@ public class LibraryController {
     @ResponseBody
     public Book getBook(@PathVariable("name") final String name){
         final Optional<Book> book = bookService.getByName(name);
-        if(book.isPresent()){
-            return book.get();
-        } else {
-            throw new EntityNotFoundException("No book found with name " + name);
-        }
+        return book.orElseThrow(() -> new EntityNotFoundException("No book found with name " + name));
     }
 
     @PostMapping(value = "/books")

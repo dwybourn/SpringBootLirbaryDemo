@@ -1,11 +1,13 @@
 package com.scottlogic.librarysimple.dao;
 
 import com.scottlogic.librarysimple.domain.Book;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Optional;
@@ -15,6 +17,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
+@ActiveProfiles("test")
 public class BookRepositoryIT {
 
     @Autowired
@@ -22,6 +25,11 @@ public class BookRepositoryIT {
 
     @Autowired
     private TestEntityManager entityManager;
+
+    @After
+    public void tearDown(){
+        bookRepository.deleteAll();
+    }
 
     @Test
     public void shouldGetBookByNameIgnoringCase(){
